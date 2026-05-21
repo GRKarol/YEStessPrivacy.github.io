@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YEStess - Private Local Notebook</title>
+  <meta name="description" content="YEStess is a local-first notebook for writing, projects, folders, and ideas.">
+  <style>
+    :root{
+      --bg:#f7f6f2;--paper:#fffdf8;--surface:#ffffff;--ink:#1a1916;--muted:#625f56;--soft:#ebe7db;
+      --line:#ded8c8;--accent:#2c5f4a;--accent2:#c9a84c;--red:#a4433b;--shadow:0 18px 60px rgba(29,25,18,.13);
+      --display:Georgia,"Times New Roman",serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.6}
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+    header{position:sticky;top:0;z-index:10;background:rgba(247,246,242,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(222,216,200,.75)}
+    nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.02em}
+    .brand img{width:34px;height:34px;border-radius:9px}
+    .nav-links{display:flex;gap:14px;align-items:center;font-size:14px;color:var(--muted)}
+    .nav-links a{text-decoration:none}
+    .hero{min-height:calc(100vh - 68px);display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center;padding:56px 0 34px}
+    .eyebrow{font-size:12px;font-weight:850;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+    h1{font-family:var(--display);font-size:clamp(44px,7vw,82px);line-height:.95;margin:14px 0 18px;font-weight:650}
+    .lead{font-size:19px;color:var(--muted);max-width:620px;margin:0 0 26px}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 18px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 18px;border-radius:12px;text-decoration:none;font-weight:800;border:1.5px solid var(--accent)}
+    .btn.primary{background:var(--accent);color:white}
+    .btn.secondary{background:var(--surface);color:var(--accent)}
+    .download-note{font-size:13px;color:var(--muted)}
+    .device{position:relative;min-height:580px}
+    .phone{position:absolute;right:0;top:10px;width:min(360px,86vw);height:650px;border-radius:42px;background:#161511;padding:14px;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.14)}
+    .screen{height:100%;border-radius:32px;background:linear-gradient(180deg,#fffdf8,#f3efe3);overflow:hidden;padding:22px 18px;color:#1c1a16}
+    .screen-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+    .dot{width:36px;height:36px;border-radius:12px;background:var(--accent);color:white;display:grid;place-items:center;font-weight:900}
+    .folder{border:1px solid var(--line);background:white;border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.04)}
+    .folder strong{display:block;font-family:var(--display);font-size:18px}
+    .folder span{font-size:13px;color:var(--muted)}
+    .editor{position:absolute;left:0;bottom:18px;width:330px;background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+    .editor h3{font-family:var(--display);font-size:24px;margin:0 0 12px}
+    .line{height:8px;background:#ded8c8;border-radius:99px;margin:8px 0}
+    .line.short{width:68%}.line.mid{width:84%}
+    section{padding:72px 0;border-top:1px solid var(--line)}
+    h2{font-family:var(--display);font-size:36px;line-height:1.08;margin:0 0 16px}
+    .section-lead{font-size:17px;color:var(--muted);max-width:740px;margin:0 0 28px}
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+    .card b{display:block;margin-bottom:6px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .legal{background:var(--paper)}
+    .legal article{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;margin:14px 0}
+    .legal h3{font-family:var(--display);font-size:26px;margin:0 0 10px}
+    .legal h4{margin:18px 0 6px}
+    .legal p,.legal li{color:var(--muted)}
+    footer{padding:30px 0;color:var(--muted);font-size:14px}
+    @media(max-width:860px){
+      .hero{grid-template-columns:1fr;padding-top:34px}
+      .device{min-height:620px}
+      .editor{left:10px}
+      .cards{grid-template-columns:1fr}
+      .nav-links{display:none}
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top"><img src="assets/yestess-logo.png" alt="">YEStess</a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#downloads">Desktop</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#terms">Terms</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Local-first notes and projects</div>
+        <h1>YEStess</h1>
+        <p class="lead">A private notebook for writing, projects, folders, audio notes, drawings, and ideas. Your notes stay local on your device unless you export them yourself.</p>
+        <div class="actions">
+          <a class="btn primary" href="#privacy">Read privacy policy</a>
+          <a class="btn secondary" href="#downloads">Desktop downloads</a>
+        </div>
+        <div class="download-note">Mobile release is prepared for Google Play. Desktop builds are planned for Windows and macOS.</div>
+      </div>
+      <div class="device" aria-hidden="true">
+        <div class="phone">
+          <div class="screen">
+            <div class="screen-top"><b>Projects</b><div class="dot">+</div></div>
+            <div class="folder"><strong>Novel draft</strong><span>12 notes · 4 sections</span></div>
+            <div class="folder"><strong>Research</strong><span>8 notes · audio and images</span></div>
+            <div class="folder"><strong>Inbox</strong><span>Quick thoughts to sort later</span></div>
+          </div>
+        </div>
+        <div class="editor">
+          <h3>Scene notes</h3>
+          <div class="line mid"></div>
+          <div class="line"></div>
+          <div class="line short"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Organize work without sending your notes to a cloud.</h2>
+      <p class="section-lead">YEStess is built around projects, folders, sections, blocks, export, and local storage. It is not a cloud notebook in the first release.</p>
+      <div class="cards">
+        <div class="card"><b>Projects and folders</b><p>Keep writing, ideas, learning materials, and archives separated.</p></div>
+        <div class="card"><b>Block editor</b><p>Text, headings, tasks, quotes, code, markdown, images, audio, and drawings.</p></div>
+        <div class="card"><b>Local backup</b><p>Export and import JSON backups when you want to move or protect your data.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="downloads">
+    <div class="wrap">
+      <h2>Desktop downloads</h2>
+      <p class="section-lead">Desktop apps are planned. These buttons are placeholders for the future Windows and macOS builds.</p>
+      <div class="actions">
+        <a class="btn secondary" href="downloads/YEStess-Desktop-Windows.exe" aria-disabled="true">Download for Windows</a>
+        <a class="btn secondary" href="downloads/YEStess-Desktop-macOS.dmg" aria-disabled="true">Download for macOS</a>
+      </div>
+      <p class="download-note">If a download is not available yet, the link will be activated after the desktop build is released.</p>
+    </div>
+  </section>
+
+  <section class="legal" id="privacy">
+    <div class="wrap">
+      <h2>Privacy and legal information</h2>
+      <article>
+        <h3>Privacy Policy</h3>
+        <p>Effective date: to be filled before publishing.</p>
+        <p>Contact: <a href="mailto:grankersteam@gmail.com">grankersteam@gmail.com</a></p>
+        <h4>Local storage</h4>
+        <p>YEStess stores notes, projects, folders, images, audio recordings, drawings, and app settings locally on the user's device. The first release does not send note contents to a YEStess cloud server.</p>
+        <h4>Backups</h4>
+        <p>Users can export and import JSON backup files. Clearing cache or cookies should not remove the main local app data, but uninstalling the app, clearing app data, losing the device, or damaging the device may remove local data. Users are responsible for making backups.</p>
+        <h4>Hidden notebook</h4>
+        <p>The hidden notebook uses local password-based protection and local encryption. YEStess cannot recover hidden notes if the user loses the password or deletes local app data.</p>
+        <h4>Audio and dictation</h4>
+        <p>Users can record audio notes locally. Dictation may use the device or system speech recognition service to convert speech to text. That processing may be handled by the operating system or the selected speech service according to the user's device settings.</p>
+        <h4>Purchases</h4>
+        <p>YEStess Quill subscriptions are planned to be handled by Google Play Billing. Payment data is processed by Google Play, not by YEStess.</p>
+        <h4>Data deletion</h4>
+        <p>Users can delete local app data in the app, through Android system settings, or by uninstalling the app. Questions about privacy can be sent to the contact email above.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="legal" id="terms">
+    <div class="wrap">
+      <article>
+        <h3>Terms of Use</h3>
+        <p>YEStess is a local-first notebook for writing and organizing projects. It is not a cloud backup service in the first release.</p>
+        <p>Users are responsible for exporting backup files if they want to protect or move their data. YEStess is not intended for storing data that requires guaranteed availability, professional backup, or regulated sector compliance.</p>
+        <p>Users must not use YEStess for illegal activity, infringement of other people's rights, or attempts to bypass app protections.</p>
+      </article>
+      <article id="subscription">
+        <h3>YEStess Quill Subscription Terms</h3>
+        <p>YEStess may offer a 30-day internal Quill Preview. This preview does not start a paid Google Play trial and does not create an automatic charge.</p>
+        <p>After the preview ends, Free limits apply unless the user has an active Quill subscription. Planned subscription prices are 5 USD monthly and 49 USD yearly, with local prices managed through Google Play.</p>
+        <p>Subscriptions, renewals, cancellations, and refunds are handled through Google Play according to Google Play terms.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="section-lead">For support, privacy questions, or data questions, contact: <a href="mailto:grankersteam@gmail.com">grankersteam@gmail.com</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">YEStess · Local-first notebook · Privacy contact: grankersteam@gmail.com</div>
+</footer>
+</body>
+</html>
